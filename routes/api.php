@@ -24,10 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post("login", [AuthenticationController::class, "login"])->name("login");
-Route::get("logout", [AuthenticationController::class, "logout"])->name("logout");
+Route::resource("report", ReportController::class);
 
 //group by auth
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource("history", HistoryController::class);
-    Route::resource("report", ReportController::class);
+ //   Route::resource("report", ReportController::class);
+    Route::get("logout", [AuthenticationController::class, "logout"])->name("logout");
 });

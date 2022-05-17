@@ -43,11 +43,11 @@ class ReportController extends Controller
  *    required=true,
  *    description="Post Reporting Data",
  *    @OA\JsonContent(
- *       required={"reporter_id","image","latitude","longitude"},
+ *       required={"reporter_id","image","location_lat","location_long"},
  *       @OA\Property(property="reporter_id", type="integer", format="integer", example="1"),
- *       @OA\Property(property="image", type="string", format="string", example="base64"),
- *       @OA\Property(property="latitude", type="string", format="string", example="9.23243324"),
- *       @OA\Property(property="longitude", type="string", format="string", example="9.77243324"),
+ *       @OA\Property(property="image", type="string", format="string", example="base64:43897594329udoiadfy348734"),
+ *       @OA\Property(property="location_lat", type="string", format="string", example="9.23243324"),
+ *       @OA\Property(property="location_long", type="string", format="string", example="9.77243324"),
  *    ),
  * ),
      *      @OA\Response(
@@ -69,7 +69,7 @@ class ReportController extends Controller
     {
         try {
             $data = $request->all();
-            $this->reportService->storeReport($request);
+            $this->reportService->storeReport($data);
             return response()->success('Successful operation', $data);
         } catch (\Throwable $th) {
           return response()->error($th->getMessage(), 500);

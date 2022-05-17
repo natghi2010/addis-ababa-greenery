@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000",
+            "url": "http://localhost:8000/api/",
             "description": ""
         }
     ],
@@ -165,8 +165,8 @@
                                 "required": [
                                     "reporter_id",
                                     "image",
-                                    "latitude",
-                                    "longitude"
+                                    "location_lat",
+                                    "location_long"
                                 ],
                                 "properties": {
                                     "reporter_id": {
@@ -177,14 +177,14 @@
                                     "image": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "base64"
+                                        "example": "base64:43897594329udoiadfy348734"
                                     },
-                                    "latitude": {
+                                    "location_lat": {
                                         "type": "string",
                                         "format": "string",
                                         "example": "9.23243324"
                                     },
-                                    "longitude": {
+                                    "location_long": {
                                         "type": "string",
                                         "format": "string",
                                         "example": "9.77243324"
