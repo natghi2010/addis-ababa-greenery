@@ -46,7 +46,7 @@ class AuthenticationController extends Controller
      */
     public function login(Request $request){
 
-        $credentials = $request->only('username','password');
+        $credentials = $request->only('email','password');
 
         if(Auth::attempt($credentials)){
            return response()->success('Login Successful',auth()->user());
