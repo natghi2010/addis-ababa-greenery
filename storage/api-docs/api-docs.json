@@ -147,6 +147,66 @@
                     }
                 ]
             }
+        },
+        "/report": {
+            "post": {
+                "tags": [
+                    "Report"
+                ],
+                "summary": "Report",
+                "description": "Report",
+                "operationId": "Report",
+                "requestBody": {
+                    "description": "Post Reporting Data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "reporter_id",
+                                    "image",
+                                    "latitude",
+                                    "longitude"
+                                ],
+                                "properties": {
+                                    "reporter_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "1"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "base64"
+                                    },
+                                    "latitude": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "9.23243324"
+                                    },
+                                    "longitude": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "9.77243324"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
         }
     },
     "tags": [

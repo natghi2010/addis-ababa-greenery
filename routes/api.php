@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthenticationController;
+use App\Http\Controllers\Api\HistoryController;
+use App\Http\Controllers\Api\ReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,11 +23,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post("login",[AuthenticationController::class,"login"])->name("login");
+Route::post("login", [AuthenticationController::class, "login"])->name("login");
+Route::get("logout", [AuthenticationController::class, "logout"])->name("logout");
 
-
-
-// Route::middleware('auth:sanctum',function(){
-
-
-// });
+//group by auth
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::resource("history", HistoryController::class);
+    Route::resource("report", ReportController::class);
+});

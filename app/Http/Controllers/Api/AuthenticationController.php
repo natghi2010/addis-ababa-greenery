@@ -49,10 +49,17 @@ class AuthenticationController extends Controller
         $credentials = $request->only('username','password');
 
         if(Auth::attempt($credentials)){
-
+           return response()->success('Login Successful',auth()->user());
         }else{
-
+            return response()->error('Login Failed',401);
         }
+    }
+
+
+
+    public function logout(){
+        Auth::logout();
+        return response()->success('Logout Successful');
     }
 
 
