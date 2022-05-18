@@ -26,7 +26,6 @@ class ReportController extends Controller
         $data = $this->reportService->getReports();
 
         return view('report',compact('data'));
-
     }
 
     /**
