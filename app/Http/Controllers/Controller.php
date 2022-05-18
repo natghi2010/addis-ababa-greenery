@@ -38,4 +38,12 @@ class Controller extends BaseController
 
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function uploadImage($file,$location){
+        $image = $file;
+        $imageName = time().'.'.$image->getClientOriginalExtension();
+        $image->move(public_path($location), $imageName);
+        return $imageName;
+
+    }
 }

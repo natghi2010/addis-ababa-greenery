@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +29,5 @@ Route::middleware([
 });
 
 
+
+Route::get('report',[ReportController::class,'index']);
