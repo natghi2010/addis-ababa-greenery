@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->text("description");
             $table->foreignId("project_type_id")->refrences("id")->on("project_types");
             $table->foreignId("team_leader_id")->refrences("id")->on("users");
+            $table->foreignId("subcity_id")->refrences("id")->on("subcities");
             $table->date("start_date");
             $table->date("end_date")->nullable();
             $table->timestamps();
