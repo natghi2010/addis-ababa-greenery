@@ -18,6 +18,7 @@ class CreateMilestonesTable extends Migration
             $table->string("name");
             $table->text("description")->nullable();
             $table->date("deadline")->nullable();
+            $table->integer("project_id");
             $table->timestamps();
         });
     }

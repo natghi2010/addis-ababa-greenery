@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->foreignId("project_id")->references("id")->on("projects")->cascadeOnDelete();
             $table->foreignId("milestone_id")->references("id")->on("milestones")->cascadeOnDelete();
-            $table->foreignId("parent_id")->references("id")->on("tasks")->nullable();
+            $table->integer("parent_id")->nullable();
             $table->string("title");
             $table->text("description");
             $table->string("status")->default("pending");
@@ -25,7 +25,7 @@ class CreateTasksTable extends Migration
         });
     }
 
-    /**
+    /**p
      * Reverse the migrations.
      *
      * @return void
