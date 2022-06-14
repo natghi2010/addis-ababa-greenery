@@ -11,6 +11,11 @@ class ProjectService
         return Project::all();
     }
 
+    public function getProjectsByProjectType($project_type_id)
+    {
+        return Project::where('project_type_id', $project_type_id)->get();
+    }
+
     public function getProject($id)
     {
         return Project::find($id);

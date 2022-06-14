@@ -16,6 +16,26 @@ class ProjectController extends Controller
     }
 
 
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getProjectsByProjectType($project_type_id)
+    {
+        try {
+            $projects = $this->projectService->getProjectsByProjectType();
+
+            return response()->success($projects);
+
+        } catch (\Throwable $th) {
+
+            return response()->error($th->getMessage());
+
+        }
+    }
+
+
     /**
      * Display a listing of the resource.
      *

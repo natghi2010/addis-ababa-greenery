@@ -30,3 +30,4 @@ Route::middleware([
 
 
 Route::get('report',[ReportController::class,'index']);
+

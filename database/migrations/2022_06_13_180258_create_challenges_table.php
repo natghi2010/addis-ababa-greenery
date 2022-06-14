@@ -15,9 +15,9 @@ class CreateChallengesTable extends Migration
     {
         Schema::create('challenges', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("project_id")->references("id")->on("projects")->cascadeOnDelete();
+            $table->integer("project_id");
             $table->text("description");
-            $table->foreignId("reporter_id")->references("id")->on("users")->nullOnDelete();
+            $table->integer("reporter_id");
             $table->timestamps();
         });
     }

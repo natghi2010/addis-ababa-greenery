@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\HistoryController;
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\ReportController;
+use App\Models\ProjectType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -32,3 +32,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
  //   Route::resource("report", ReportController::class);
     Route::get("logout", [AuthenticationController::class, "logout"])->name("logout");
 });
+
+
+Route::apiResource('/project', ProjectController::class);
+Route::apiResource('/project-type', ProjectType::class);
+
