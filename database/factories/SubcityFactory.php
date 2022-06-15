@@ -14,7 +14,9 @@ class SubcityFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "name"=>$this->faker->word,
+            "city_id"=>1,
+            "abbrevation"=>$this->faker->word,
         ];
     }
 }

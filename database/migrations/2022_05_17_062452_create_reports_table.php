@@ -15,10 +15,13 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-         //   $table->foreignId('project_id')->references('id')->on('projects')->nullOnDelete();
+            $table->integer('project_id')->default(0);
+            $table->integer('reporter_id');
             $table->string('image')->nullable();
             $table->string('location_lat')->nullable();
             $table->string('location_long')->nullable();
+            $table->string("answer");
+            $table->boolean("cheated")->default(false);
             $table->timestamps();
         });
     }

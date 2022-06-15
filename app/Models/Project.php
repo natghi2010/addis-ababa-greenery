@@ -14,10 +14,10 @@ class Project extends Model
     }
 
     public function stakeHolders(){
-        return $this->hasMany(User::class);
+        return $this->hasMany(StakeHolder::class);
     }
 
     public function teamMembers(){
-        return $this->hasMany(User::class);
+        return $this->hasMany(TeamMember::class);
     }
 }

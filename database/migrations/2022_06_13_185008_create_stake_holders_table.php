@@ -16,7 +16,7 @@ class CreateStakeHoldersTable extends Migration
         Schema::create('stake_holders', function (Blueprint $table) {
             $table->id();
             $table->foreignId("project_id")->references("id")->on("projects");
-            $table->foreignId("stake_holder_id")->references("id")->on("users");
+            $table->foreignId("user_id")->references("id")->on("users");
             $table->timestamps();
         });
     }

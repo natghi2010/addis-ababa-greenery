@@ -15,6 +15,9 @@ class CreateSubcitiesTable extends Migration
     {
         Schema::create('subcities', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
+            $table->string("abbrevation");
+            $table->integer("city_id");
             $table->timestamps();
         });
     }
