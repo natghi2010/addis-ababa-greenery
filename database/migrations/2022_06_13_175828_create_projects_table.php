@@ -22,6 +22,8 @@ class CreateProjectsTable extends Migration
             $table->foreignId("team_leader_id")->refrences("id")->on("users")->default(0);
             $table->foreignId("subcity_id")->refrences("id")->on("subcities")->default(0);
             $table->foreignId("qr_code_id")->refrences("id")->on("qr_codes")->default(0);
+            $table->string("location_lat");
+            $table->string("location_long");
             $table->date("start_date");
             $table->date("end_date")->nullable();
             $table->timestamps();
