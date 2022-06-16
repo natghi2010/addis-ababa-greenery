@@ -8,6 +8,7 @@ use App\Models\Milestone;
 use App\Models\TeamMember;
 use App\Models\StakeHolder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProjectService
 {
@@ -28,6 +29,7 @@ class ProjectService
 
     public function createProject($data)
     {
+return $data;
         \DB::beginTransaction();
 
            Project::create([
@@ -35,21 +37,22 @@ class ProjectService
             "project_type_id" => $data["project_type_id"],
             "team_leader_id" => $data["team_leader_id"],
             "subcity_id" => $data["subcity_id"],
-            "qr_code_id" => $data["qr_code_id"],
+            // "qr_code_id" => $data["qr_code_id"],
             "location_lat" => $data["location_lat"],
             "location_long" => $data["location_long"],
             "description" => $data["description"],
-            "start_date" => $data["start_date"],
-            "end_date" => $data["end_date"],
+            "start_date" => Carbon::now()->toDateTimeString(),
+            "end_date" => Carbon::now()->addMonth(3)->toDateTimeString(),
         ])->each(
             function ($project) use ($data) {
-                $project->milestones()->saveMany($data["milestones"])->each(
-                    function ($milestone) use ($data) {
-                        $milestone->tasks()->saveMany($data["milestones"]["title"]["tasks"]);
-                    }
+
+                $project->milestones()->createMany($data["milestones"])->each(
+
                 );
-                $project->stakeHolders()->saveMany($data["stake_holders"]);
-                $project->teamMembers()->saveMany($data["team_members"]);
+
+                $project->milestones()->createMany($data["milestones"],["project_id" => $project->id]);
+              //  $project->teamMembers()->createMany($data["team_members"]);
+             //   $project->stakeHolders()->createMany($data["stake_holders"]);
             }
         );
 

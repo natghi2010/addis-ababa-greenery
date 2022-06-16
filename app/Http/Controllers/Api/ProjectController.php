@@ -64,7 +64,17 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        try {
+            return $this->projectService->createProject($request->all());
+
+            return response()->success();
+
+        } catch (\Throwable $th) {
+
+            return response()->error($th->getLine());
+
+        }
     }
 
     /**
