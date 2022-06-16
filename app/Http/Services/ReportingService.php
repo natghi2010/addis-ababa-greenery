@@ -2,8 +2,9 @@
 
 namespace App\Http\Services;
 
-use App\Http\Services\Utilites\ReportAuthenticationService;
 use App\Models\Report;
+use App\Models\Project;
+use App\Http\Services\Utilites\ReportAuthenticationService;
 
 class ReportingService
 {
@@ -27,11 +28,19 @@ class ReportingService
 
     public function storeReport($data)
     {
-        $project = auth()->user()->project;
+        //$project = auth()->user()->project();
 
-        $data["cheated"] = $this->ReportAuthenticationService->isValid($project, $data['qr_code_value'], $data['location_lat'], $data['location_long']);
+        $project = Project::first();
+        $data["cheated"] = !$this->ReportAuthenticationService->isValid($project, $data['qr_code_value'], $data['location_lat'], $data['location_long']);
 
-        return Report::create($data);
+        return Report::create([
+            "reporter_id"=>auth()->user()->id,
+            "location_long"=>$data["location_long"],
+            "location_lat"=>$data["location_lat"],
+            "project_id"=>$project->id,
+            "cheated"=>$data["cheated"],
+            "answer"=>$data["answer"]
+        ]);
     }
 
     public function updateReport($report, $data)

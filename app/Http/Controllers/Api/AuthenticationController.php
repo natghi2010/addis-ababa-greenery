@@ -51,7 +51,7 @@ class AuthenticationController extends Controller
         if(Auth::attempt($credentials)){
             $user = Auth::user();
             $user->token = $user->createToken('green')->plainTextToken;
-           return response()->success('Login Successful',$user);
+           return response()->success($user);
         }else{
             return response()->error('Login Failed',401);
         }

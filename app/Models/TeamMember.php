@@ -9,6 +9,7 @@ class TeamMember extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
 
     public function project()
     {

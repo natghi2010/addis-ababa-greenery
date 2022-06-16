@@ -42,6 +42,8 @@ class DatabaseSeeder extends Seeder
 
                 $projectType->projects()->saveMany(Project::factory(5)->create(["project_type_id" => $projectType->id, "team_leader_id" => $user->id, "subcity_id" => Subcity::inRandomOrder()->first()->id])->each(function ($project) {
 
+                    $project->teamMembers()->create(["user_id" => 1]);
+
                     $project->milestones()->saveMany(Milestone::factory(5)->create(["project_id" => $project->id])->each(function ($milestone) use ($project) {
 
                         $milestone->tasks()->saveMany(Task::factory(5)->create(["project_id" => $project->id, "milestone_id" => $milestone->id]));

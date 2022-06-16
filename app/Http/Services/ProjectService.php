@@ -29,10 +29,10 @@ class ProjectService
 
     public function createProject($data)
     {
-return $data;
+
         \DB::beginTransaction();
 
-           Project::create([
+        Project::create([
             "name" => $data["name"],
             "project_type_id" => $data["project_type_id"],
             "team_leader_id" => $data["team_leader_id"],
@@ -46,13 +46,27 @@ return $data;
         ])->each(
             function ($project) use ($data) {
 
-                $project->milestones()->createMany($data["milestones"])->each(
+                $project->teamMembers()->createMany($data["team_members"]);
+                $project->stakeholders()->createMany($data["stake_holders"]);
 
+                foreach ($data["milestones"] as $milestone) {
+                    $milestones[] = [
+                        "name" => $milestone["name"],
+                        "description" => $milestone["description"]
+                    ];
+                }
+
+                $count = 0;
+
+                $project->milestones()->createMany($milestones)->each(
+                    function ($milestone) use ($count, $data, $project) {
+                        foreach ($data["milestones"][$count]["tasks"] as $key => $task) {
+                            $data["milestones"][$count]["tasks"][$key]["project_id"] = $project->id;
+                        }
+                        $milestone->tasks()->createMany($data["milestones"][$count]["tasks"]);
+                        $count++;
+                    }
                 );
-
-                $project->milestones()->createMany($data["milestones"],["project_id" => $project->id]);
-              //  $project->teamMembers()->createMany($data["team_members"]);
-             //   $project->stakeHolders()->createMany($data["stake_holders"]);
             }
         );
 

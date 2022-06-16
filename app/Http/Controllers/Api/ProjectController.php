@@ -66,13 +66,15 @@ class ProjectController extends Controller
     {
 
         try {
-            return $this->projectService->createProject($request->all());
+
+            dd(auth()->user());
+            $this->projectService->createProject($request->all());
 
             return response()->success();
 
         } catch (\Throwable $th) {
 
-            return response()->error($th->getLine());
+            return response()->error($th->getMessage());
 
         }
     }
