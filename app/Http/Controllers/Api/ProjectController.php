@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Project;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ProjectService;
-use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -74,7 +75,16 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $project = $this->projectService->getProject($id);
+
+            return response()->success($project);
+
+        } catch (\Throwable $th) {
+
+            return response()->error($th->getMessage());
+
+        }
     }
 
     /**
