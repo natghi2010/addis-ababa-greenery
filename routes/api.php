@@ -39,6 +39,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get("logout", [AuthenticationController::class, "logout"])->name("logout");
 });
 
+
+//Test
 Route::prefix("v1")->group(function(){
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/project', ProjectController::class);
