@@ -56,6 +56,8 @@ class ReportSummaryService
 
     public function getProjectMilestone($project_id)
     {
+
+        //projcts
         return \DB::table("projects")
             ->join("milestones", "milestones.project_id", "=", "projects.id")
             ->join("tasks", "milestones.id", "=", "tasks.milestone_id")
