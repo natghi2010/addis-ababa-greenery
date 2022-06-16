@@ -69,13 +69,6 @@ class ReportController extends Controller
     {
         try {
             $data = $request->all();
-            if($request->hasFile('image')){
-                $data['image'] = $this->uploadImage($request->file('image'),'report');
-            }else{
-                return response()->error('Image is required',400);
-            }
-
-
             $this->reportService->storeReport($data);
             return response()->success('Successful operation', $data);
         } catch (\Throwable $th) {
