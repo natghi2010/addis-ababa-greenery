@@ -3,5 +3,5 @@ deployment:
       - export DEPLOYPATH=/home/jasminea/public_html/green
     #  - /usr/local/bin/composer install
       - /bin/cp -R * $DEPLOYPATH
-      - /bin/cp  * $DEPLOYPATH/env.example .env
+    #  - /bin/cp  * $DEPLOYPATH/env.example .env
 
