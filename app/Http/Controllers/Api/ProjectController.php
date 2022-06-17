@@ -25,6 +25,7 @@ class ProjectController extends Controller
     public function getProjectsByProjectType($project_type_id)
     {
         try {
+
             $projects = $this->projectService->getProjectsByProjectType($project_type_id);
 
             return response()->success($projects);

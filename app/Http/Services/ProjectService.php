@@ -12,6 +12,14 @@ use Carbon\Carbon;
 
 class ProjectService
 {
+    protected $reportSummaryService;
+
+    public function __construct(ReportSummaryService $reportSummaryService)
+    {
+        $this->reportSummaryService = $reportSummaryService;
+    }
+
+
     public function getProjects()
     {
         return Project::all();
@@ -19,7 +27,10 @@ class ProjectService
 
     public function getProjectsByProjectType($project_type_id)
     {
-        return Project::where('project_type_id', $project_type_id)->get();
+
+        $projectType = $this->reportSummaryService->getProjectTypeSummary($project_type_id)->first();
+        $projectType->projects =  $this->reportSummaryService->getProjectsSummary($project_type_id);
+        return $projectType;
     }
 
     public function getProject($id)

@@ -15,11 +15,14 @@ class ReportSummaryService
             ->get();
     }
 
-    public function getProjectTypeSummary()
+    public function getProjectTypeSummary($project_type_id = false)
     {
         return \DB::table("projects")
             ->join("tasks", "projects.id", "=", "tasks.project_id")
             ->join("project_types", "projects.project_type_id", "=", "project_types.id")
+            ->when($project_type_id, function ($query) use ($project_type_id) {
+                return $query->where("project_types.id", $project_type_id);
+            })
             ->select(
                 \DB::raw('SUM(CASE WHEN status = "closed" THEN 1 ELSE 0 END) as closed'),
                 \DB::raw('SUM(CASE WHEN status IS NOT NULL THEN 1 ELSE 0 END) as total'),
@@ -31,7 +34,6 @@ class ReportSummaryService
                 "project_types.title",
                 "project_types.id"
             )
-
             ->get();
     }
 
@@ -40,17 +42,17 @@ class ReportSummaryService
         return \DB::table("projects")
             ->join("tasks", "projects.id", "=", "tasks.project_id")
             ->join("project_types", "projects.project_type_id", "=", "project_types.id")
-            ->where("project_types", $project_type_id)
+            ->where("project_types.id", $project_type_id)
             ->select(
                 \DB::raw('SUM(CASE WHEN status = "closed" THEN 1 ELSE 0 END) as closed'),
                 \DB::raw('SUM(CASE WHEN status IS NOT NULL THEN 1 ELSE 0 END) as total'),
                 \DB::raw('ROUND(SUM(CASE WHEN status = "closed" THEN 1 ELSE 0 END) / SUM(CASE WHEN status IS NOT NULL THEN 1 ELSE 0 END) * 100,2) AS total_progress'),
-                "project_types.title as project_type_name",
-                "project_types.id as project_type_id"
+                "projects.name as project_name",
+                "projects.id as project_id"
             )
             ->groupBy(
-                "project_types.title",
-                "project_types.id"
+                "projects.name",
+                "projects.id"
             )->get();
     }
 

@@ -45,5 +45,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 Route::prefix("v1")->group(function(){
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/project', ProjectController::class);
+    Route::get('/getProjectsByProjectType/{project_type_id}',[ProjectController::class,'getProjectsByProjectType']);
     Route::apiResource('/project-type', ProjectType::class);
 });

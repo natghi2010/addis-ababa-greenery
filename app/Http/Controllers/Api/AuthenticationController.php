@@ -58,7 +58,6 @@ class AuthenticationController extends Controller
     }
 
 
-
     public function logout(){
         Auth::logout();
         return response()->success('Logout Successful');
