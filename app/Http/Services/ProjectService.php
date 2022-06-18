@@ -98,7 +98,7 @@ class ProjectService
 
     public function getProjectFormOptions(){
           return [
-              "project_types"=>\DB::table("project_types")->select('id','name')->get(),
+              "project_types"=>\DB::table("project_types")->select('id','title')->get(),
               "users"=>\DB::table("users")->select('id','name')->get(),
               "subcities"=>\DB::table("subcities")->select('id','name')->get()
           ];
