@@ -122,4 +122,18 @@ class ProjectController extends Controller
     {
         //
     }
+
+
+    public function getProjectFormOptions(){
+        try {
+            $project_types = $this->projectService->getProjectFormOptions();
+
+            return response()->success($project_types);
+
+        } catch (\Throwable $th) {
+
+            return response()->error($th->getMessage());
+
+        }
+    }
 }
