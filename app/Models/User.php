@@ -58,4 +58,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function project(){
+        return $this->hasOneThrough(Project::class, TeamMember::class, 'user_id', 'project_id', 'id', 'user_id');
+    }
 }

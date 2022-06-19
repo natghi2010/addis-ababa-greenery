@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Project;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Services\ProjectService;
-use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -24,6 +25,7 @@ class ProjectController extends Controller
     public function getProjectsByProjectType($project_type_id)
     {
         try {
+
             $projects = $this->projectService->getProjectsByProjectType($project_type_id);
 
             return response()->success($projects);
@@ -63,7 +65,19 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        try {
+
+            dd(auth()->user());
+            $this->projectService->createProject($request->all());
+
+            return response()->success();
+
+        } catch (\Throwable $th) {
+
+            return response()->error($th->getMessage());
+
+        }
     }
 
     /**
@@ -74,7 +88,16 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $project = $this->projectService->getProject($id);
+
+            return response()->success($project);
+
+        } catch (\Throwable $th) {
+
+            return response()->error($th->getMessage());
+
+        }
     }
 
     /**
@@ -98,5 +121,19 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function getProjectFormOptions(){
+        try {
+            $project_types = $this->projectService->getProjectFormOptions();
+
+            return response()->success($project_types);
+
+        } catch (\Throwable $th) {
+
+            return response()->error($th->getMessage());
+
+        }
     }
 }

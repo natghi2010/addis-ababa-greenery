@@ -1,4 +1,5 @@
 deployment:
     tasks:
-      - export DEPLOYPATH=/home/jasminea/public_html/green
+      - export DEPLOYPATH=/home/jasminea/public_html/green/
       - /bin/cp -R * $DEPLOYPATH
+

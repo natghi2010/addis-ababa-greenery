@@ -31,9 +31,7 @@ class ReportController extends Controller
             return response()->success('Successful operation', $data);
 
         } catch (\Throwable $th) {
-
             return response()->error($th->getMessage(), 500);
-
         }
     }
 
@@ -74,17 +72,15 @@ class ReportController extends Controller
     {
         try {
             $data = $request->all();
-            if ($request->hasFile('image')) {
-                $data['image'] = $this->uploadImage($request->file('image'), 'report');
-            } else {
-                return response()->error('Image is required', 400);
-            }
-
 
             $this->reportService->storeReport($data);
-            return response()->success('Successful operation', $data);
+
+            return response()->success();
+
         } catch (\Throwable $th) {
+
             return response()->error($th->getMessage(), 500);
+
         }
     }
 

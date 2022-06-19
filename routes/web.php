@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Web\ReportController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,6 @@ Route::middleware([
     })->name('dashboard');
 });
 
-
+Route::get('dashboard',[DashboardController::class,'index']);
 Route::get('report',[ReportController::class,'index']);
 

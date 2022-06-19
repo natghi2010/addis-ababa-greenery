@@ -54,20 +54,14 @@ class AuthenticationController extends Controller
             $user = Auth::user();
 
             $user->token = $user->createToken('green')->plainTextToken;
-
-            return response()->success('Login Successful', $user);
-
-        } else {
-
-            return response()->error('Login Failed', 401);
-
+           return response()->success($user);
+        }else{
+            return response()->error('Login Failed',401);
         }
     }
 
 
-
-    public function logout()
-    {
+    public function logout(){
         Auth::logout();
 
         return response()->success('Logout Successful');

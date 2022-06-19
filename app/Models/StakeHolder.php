@@ -9,4 +9,15 @@ class StakeHolder extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

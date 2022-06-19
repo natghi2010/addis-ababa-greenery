@@ -17,6 +17,9 @@ class ProjectFactory extends Factory
         return [
             "name"=>$this->faker->name,
             "description"=>$this->faker->text,
+            "cover_image"=>"https://www.arabianbusiness.com/cloud/2021/09/14/ZGzm4bk2-la-gare-eagle-hills.jpg",
+            "location_lat"=>$this->faker->latitude,
+            "location_long"=>$this->faker->longitude,
             "start_date"=>today()
         ];
     }
