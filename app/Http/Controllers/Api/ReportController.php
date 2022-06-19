@@ -25,14 +25,19 @@ class ReportController extends Controller
     public function index()
     {
         try {
+
             $data = $this->reportService->getReports();
+
             return response()->success('Successful operation', $data);
+
         } catch (\Throwable $th) {
-          return response()->error($th->getMessage(), 500);
+
+            return response()->error($th->getMessage(), 500);
+
         }
     }
 
-     /**
+    /**
      * @OA\Post(
      *      path="/report",
      *      operationId="Report",
@@ -40,16 +45,16 @@ class ReportController extends Controller
      *      summary="Report",
      *      description="Report",
      *  @OA\RequestBody(
- *    required=true,
- *    description="Post Reporting Data",
- *    @OA\JsonContent(
- *       required={"reporter_id","image","location_lat","location_long"},
- *       @OA\Property(property="reporter_id", type="integer", format="integer", example="1"),
- *       @OA\Property(property="image", type="string", format="string", example="base64:43897594329udoiadfy348734"),
- *       @OA\Property(property="location_lat", type="string", format="string", example="9.23243324"),
- *       @OA\Property(property="location_long", type="string", format="string", example="9.77243324"),
- *    ),
- * ),
+     *    required=true,
+     *    description="Post Reporting Data",
+     *    @OA\JsonContent(
+     *       required={"reporter_id","image","location_lat","location_long"},
+     *       @OA\Property(property="reporter_id", type="integer", format="integer", example="1"),
+     *       @OA\Property(property="image", type="string", format="string", example="base64:43897594329udoiadfy348734"),
+     *       @OA\Property(property="location_lat", type="string", format="string", example="9.23243324"),
+     *       @OA\Property(property="location_long", type="string", format="string", example="9.77243324"),
+     *    ),
+     * ),
      *      @OA\Response(
      *          response=201,
      *          description="Successful operation",
@@ -69,17 +74,17 @@ class ReportController extends Controller
     {
         try {
             $data = $request->all();
-            if($request->hasFile('image')){
-                $data['image'] = $this->uploadImage($request->file('image'),'report');
-            }else{
-                return response()->error('Image is required',400);
+            if ($request->hasFile('image')) {
+                $data['image'] = $this->uploadImage($request->file('image'), 'report');
+            } else {
+                return response()->error('Image is required', 400);
             }
 
 
             $this->reportService->storeReport($data);
             return response()->success('Successful operation', $data);
         } catch (\Throwable $th) {
-          return response()->error($th->getMessage(), 500);
+            return response()->error($th->getMessage(), 500);
         }
     }
 
@@ -91,7 +96,7 @@ class ReportController extends Controller
             $data = $this->reportService->getReportDetail($id);
             return response()->success('Successful operation', $data);
         } catch (\Throwable $th) {
-          return response()->error($th->getMessage(), 500);
+            return response()->error($th->getMessage(), 500);
         }
     }
 
@@ -109,7 +114,7 @@ class ReportController extends Controller
             $this->reportService->updateReport($report, $request);
             return response()->success('Successful operation', $data);
         } catch (\Throwable $th) {
-          return response()->error($th->getMessage(), 500);
+            return response()->error($th->getMessage(), 500);
         }
     }
 

@@ -9,11 +9,13 @@ class Milestone extends Model
 {
     use HasFactory;
 
-    public function tasks(){
+    public function tasks()
+    {
         return $this->hasMany(Task::class);
     }
 
-    public function project(){
+    public function project()
+    {
         return $this->belongsTo(Project::class);
     }
 }
