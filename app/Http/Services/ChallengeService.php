@@ -30,4 +30,5 @@ class ChallengeService
     {
         Challenge::find($id)->delete();
     }
+
 }

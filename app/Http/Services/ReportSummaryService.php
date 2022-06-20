@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 class ReportSummaryService
 {
+
     public function getOverAllProgress()
     {
         return \DB::table("tasks")
@@ -37,12 +38,16 @@ class ReportSummaryService
             ->get();
     }
 
+
     public function getProjectsSummary($project_type_id)
     {
         return \DB::table("projects")
             ->join("tasks", "projects.id", "=", "tasks.project_id")
             ->join("project_types", "projects.project_type_id", "=", "project_types.id")
             ->where("project_types.id", $project_type_id)
+             ->when($project_type_id, function ($query) use ($project_type_id) {
+                return $query->where("project_types.id", $project_type_id);
+            })
             ->select(
                 \DB::raw('SUM(CASE WHEN status = "closed" THEN 1 ELSE 0 END) as closed'),
                 \DB::raw('SUM(CASE WHEN status IS NOT NULL THEN 1 ELSE 0 END) as total'),
@@ -58,7 +63,6 @@ class ReportSummaryService
 
     public function getProjectMilestone($project_id)
     {
-
         //projcts
         return \DB::table("projects")
             ->join("milestones", "milestones.project_id", "=", "projects.id")
@@ -76,5 +80,6 @@ class ReportSummaryService
                 "milestones.name",
             )->get();
     }
+
 
 }

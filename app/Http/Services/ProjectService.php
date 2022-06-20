@@ -35,7 +35,11 @@ class ProjectService
 
     public function getProject($id)
     {
-        return Project::with("projectType", "challenges", "milestones.tasks", "teamLeader", "teamMembers.user", "stakeHolders.user")->find($id);
+        $project =  Project::with("projectType", "challenges", "teamLeader", "teamMembers.user", "stakeHolders.user")->find($id);
+        $project->milestones =  $this->reportSummaryService->getProjectMilestone($project->project_type_id,$project->id);
+
+        return $project;
+
     }
 
     public function createProject($data)
@@ -103,7 +107,7 @@ class ProjectService
               "subcities"=>\DB::table("subcities")->select('id','name')->get()
           ];
 
-          $users = \DB::table("users")->select('name')->get();
+          $users = \DB::table("users")->select('id','name')->get();
 
           foreach($users as $user){
               $data["users"][] = $user->name;

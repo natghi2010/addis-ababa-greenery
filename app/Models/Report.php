@@ -19,5 +19,6 @@ class Report extends Model
     public function getImageAttribute($value)
     {
         return 'data:image/png;base64,' . $value;
+
     }
 }

@@ -16,7 +16,8 @@ class Project extends Model
         return $this->hasMany(Milestone::class);
     }
 
-    public function projectType(){
+    public function projectType()
+    {
         return $this->belongsTo(ProjectType::class)->select('id', 'title');
     }
 
@@ -37,6 +38,16 @@ class Project extends Model
 
     public function challenges()
     {
-        return $this->hasMany(Challenge::class);
+        return $this->hasMany(Report::class)->where("answer", '!=', null);
+    }
+
+    public function qrCode()
+    {
+        return $this->belongsTo(QrCode::class);
+    }
+
+    public function report()
+    {
+        return $this->hasMany(Report::class);
     }
 }

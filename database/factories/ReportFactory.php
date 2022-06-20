@@ -14,7 +14,7 @@ class ReportFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "answer"=>$this->faker->randomElement(["Need more supplies.","There is a slow progress.","The rain is becoming an obstacle.","The paint must be repainted.",null])
         ];
     }
 }
