@@ -15,7 +15,8 @@ class Milestone extends Model
         return $this->hasMany(Task::class);
     }
 
-    public function project(){
+    public function project()
+    {
         return $this->belongsTo(Project::class);
     }
 }

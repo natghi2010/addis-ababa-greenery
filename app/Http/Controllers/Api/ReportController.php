@@ -25,8 +25,11 @@ class ReportController extends Controller
     public function index()
     {
         try {
+
             $data = $this->reportService->getReports();
+
             return response()->success('Successful operation', $data);
+
         } catch (\Throwable $th) {
             return response()->error($th->getMessage(), 500);
         }

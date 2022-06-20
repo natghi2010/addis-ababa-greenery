@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthenticationController extends Controller
 {
 
- /**
+    /**
      * @OA\Post(
      *      path="/login",
      *      operationId="Login",
@@ -17,14 +17,14 @@ class AuthenticationController extends Controller
      *      summary="Login",
      *      description="Login",
      *      * @OA\RequestBody(
- *    required=true,
- *    description="Pass user credentials",
- *    @OA\JsonContent(
- *       required={"email","password"},
- *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
- *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
- *    ),
- * ),
+     *    required=true,
+     *    description="Pass user credentials",
+     *    @OA\JsonContent(
+     *       required={"email","password"},
+     *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *    ),
+     * ),
      *      @OA\Response(
      *          response=201,
      *          description="Successful operation",
@@ -44,12 +44,15 @@ class AuthenticationController extends Controller
      *      )
      * )
      */
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
-        $credentials = $request->only('email','password');
+        $credentials = $request->only('email', 'password');
 
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
+
             $user = Auth::user();
+
             $user->token = $user->createToken('green')->plainTextToken;
            return response()->success($user);
         }else{
@@ -60,8 +63,7 @@ class AuthenticationController extends Controller
 
     public function logout(){
         Auth::logout();
+
         return response()->success('Logout Successful');
     }
-
-
 }
