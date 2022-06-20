@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProjectCreateRequest;
 use App\Http\Services\ProjectService;
 
 class ProjectController extends Controller
@@ -63,12 +64,10 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectCreateRequest $request)
     {
-
         try {
 
-            dd(auth()->user());
             $this->projectService->createProject($request->all());
 
             return response()->success();
