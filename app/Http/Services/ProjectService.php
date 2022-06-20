@@ -38,9 +38,7 @@ class ProjectService
         $project =  Project::with("projectType", "challenges", "teamLeader", "teamMembers.user", "reports", "stakeHolders.user")->find($id);
         $project->milestones =  $this->reportSummaryService->getProjectMilestone($project->project_type_id,$project->id);
 
-
         return $project;
-
     }
 
     public function createProject($data)
@@ -102,6 +100,7 @@ class ProjectService
 
 
     public function getProjectFormOptions(){
+
           $data = [
               "project_types"=>\DB::table("project_types")->select('id','title')->get(),
               "users"=>[],
