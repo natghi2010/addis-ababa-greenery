@@ -38,6 +38,7 @@ class ReportingService
             "location_long"=>$data["location_long"],
             "location_lat"=>$data["location_lat"],
             "project_id"=>$project->id,
+            "image"=>$data["image"],
             "cheated"=>$data["cheated"],
             "answer"=>$data["answer"]
         ]);
