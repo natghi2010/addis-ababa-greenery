@@ -23,7 +23,7 @@ class ReportingService
 
     public function getReportDetail($id)
     {
-        return Report::find($id);
+        return Report::with('project.subcity')->find($id);
     }
 
     public function storeReport($data)

@@ -50,4 +50,8 @@ class Project extends Model
     {
         return $this->hasMany(Report::class);
     }
+
+    public function subcity(){
+        return $this->belongsTo(Subcity::class);
+    }
 }

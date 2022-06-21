@@ -33,4 +33,10 @@ class Report extends Model
     public function getTimeAttribute(){
         return Carbon::parse($this->created_at)->format('h:i A');
     }
+
+    public function project(){
+        return $this->belongsTo(Project::class)->select('id','name');
+    }
+
+
 }

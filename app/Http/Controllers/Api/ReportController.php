@@ -90,6 +90,7 @@ class ReportController extends Controller
         try {
 
             $data = $this->reportService->getReportDetail($id);
+
             return response()->success($data);
         } catch (\Throwable $th) {
             return response()->error($th->getMessage(), 500);
