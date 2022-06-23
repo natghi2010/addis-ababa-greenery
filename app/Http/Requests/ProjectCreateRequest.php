@@ -24,7 +24,7 @@ class ProjectCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required|unique:table"
+            "name"=>"required|unique:projects"
         ];
     }
 }

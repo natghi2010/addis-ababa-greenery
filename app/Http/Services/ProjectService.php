@@ -103,15 +103,10 @@ class ProjectService
 
           $data = [
               "project_types"=>\DB::table("project_types")->select('id','title')->get(),
-              "users"=>[],
+              "users"=>\DB::table("users")->select('id','name')->get(),
               "subcities"=>\DB::table("subcities")->select('id','name')->get()
           ];
 
-          $users = \DB::table("users")->select('id','name')->get();
-
-          foreach($users as $user){
-              $data["users"][] = $user->name;
-          }
 
           return $data;
     }
