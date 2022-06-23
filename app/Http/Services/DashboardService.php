@@ -16,6 +16,7 @@ class DashboardService
         return ["overall_progress"=>$this->reportSummaryService->getOverAllProgress(),
                 "project_type_summary"=>$this->reportSummaryService->getProjectTypeSummary(),
                 "milestone_progress"=>$this->reportSummaryService->getProjectMilestone(1),
+                "getProjectSummaryBySubcity"=>$this->reportSummaryService->getProjectSummaryBySubcity(),
                ];
 
 

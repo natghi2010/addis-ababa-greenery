@@ -82,4 +82,23 @@ class ReportSummaryService
     }
 
 
+    public function getProjectSummaryBySubcity(){
+        return \DB::table("projects")
+            ->join("tasks", "projects.id", "=", "tasks.project_id")
+            ->join("project_types", "projects.project_type_id", "=", "project_types.id")
+            ->join("subcities", "projects.subcity_id", "=", "subcities.id")
+            ->select(
+                \DB::raw('SUM(CASE WHEN status = "closed" THEN 1 ELSE 0 END) as closed'),
+                \DB::raw('SUM(CASE WHEN status IS NOT NULL THEN 1 ELSE 0 END) as total'),
+                \DB::raw('ROUND(SUM(CASE WHEN status = "closed" THEN 1 ELSE 0 END) / SUM(CASE WHEN status IS NOT NULL THEN 1 ELSE 0 END) * 100,2) AS total_progress'),
+                "subcities.name as subcity_name",
+                "subcities.id as subcity_id"
+            )
+            ->groupBy(
+                "subcities.id",
+                "subcities.name",
+            )->get();
+    }
+
+
 }

@@ -24,7 +24,22 @@ class ProjectCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required|unique:projects"
+            "name"=>"required|unique:projects",
+            "description"=>"required",
+            "location_lat"=>"required",
+            "location_long"=>"required",
         ];
     }
+
+    public function messages()
+    {
+        return [
+            "name.required"=>"Project name is required",
+            "name.unique"=>"Project name is already taken",
+            "description.required"=>"Project description is required",
+            "location_lat.required"=>"Project location latitude is required. Please select a location on the map",
+            "location_long.required"=>"Project location longitude is required. Please select a location on the map",
+        ];
+    }
+
 }
