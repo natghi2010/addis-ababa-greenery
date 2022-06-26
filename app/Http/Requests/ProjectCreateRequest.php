@@ -28,6 +28,10 @@ class ProjectCreateRequest extends FormRequest
             "description"=>"required",
             "location_lat"=>"required",
             "location_long"=>"required",
+            "milestones.*.name"=>"required",
+            "milestones.*.description"=>"required",
+            "milestones.tasks.*.name"=>"required",
+            "milestones.tasks.*.description"=>"required",
         ];
     }
 
@@ -39,6 +43,11 @@ class ProjectCreateRequest extends FormRequest
             "description.required"=>"Project description is required",
             "location_lat.required"=>"Project location latitude is required. Please select a location on the map",
             "location_long.required"=>"Project location longitude is required. Please select a location on the map",
+            "milestones.*.name.required"=>"Milestone name is required",
+            "milestones.*.description.required"=>"Milestone description is required",
+            "milestones.tasks.*.name.required"=>"Task name is required",
+            "milestones.tasks.*.description.required"=>"Task description is required",
+
         ];
     }
 
