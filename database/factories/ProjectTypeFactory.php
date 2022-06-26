@@ -14,7 +14,7 @@ class ProjectTypeFactory extends Factory
     public function definition()
     {
         return [
-            "title"=>$this->faker->word,
+            "title"=>$this->faker->unique()->randomElement(["Dams","Buildings","Roads","Water","Waste","Parks"]),
         ];
     }
 }
