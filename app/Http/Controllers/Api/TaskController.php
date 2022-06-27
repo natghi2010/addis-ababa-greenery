@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Services\TaskService;
 
 class TaskController extends Controller
 {
+    protected $taskService;
+
+    public function __construct(TaskService $taskService)
+    {
+        $this->taskService = $taskService;
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,6 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -46,9 +57,16 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        try {
+            $this->taskService->updateTask($task, $request->all());
+
+            return response()->success();
+        } catch (\Exception $e) {
+
+            return response()->json($e->getMessage(), 500);
+        }
     }
 
     /**

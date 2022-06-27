@@ -21,14 +21,13 @@ class TaskService
         return Task::create($data);
     }
 
-    public function updateTask($id, $data)
+    public function updateTask($task, $data)
     {
-        Task::find($id)->update($data);
+        $task->update($data);
     }
 
     public function deleteTask($id)
     {
         Task::find($id)->delete();
     }
-
 }

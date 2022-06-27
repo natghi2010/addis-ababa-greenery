@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\UserController;
 
 /*
@@ -26,8 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("dev",function(){
-   return User::all();
+Route::get("dev", function () {
+    return User::all();
 });
 
 Route::post("login", [AuthenticationController::class, "login"])->name("login");
@@ -37,18 +38,18 @@ Route::post("login", [AuthenticationController::class, "login"])->name("login");
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource("report", ReportController::class);
     Route::resource("history", HistoryController::class);
- //   Route::resource("report", ReportController::class);
     Route::get("logout", [AuthenticationController::class, "logout"])->name("logout");
 });
 
 
-//clean url
-Route::prefix("v1")->group(function(){
+//Test
+Route::prefix("v1")->group(function () {
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/project', ProjectController::class);
     Route::apiResource('/user', UserController::class);
-    Route::get('/getProjectsByProjectType/{project_type_id}',[ProjectController::class,'getProjectsByProjectType']);
-    Route::get('form-options/project',[ProjectController::class,"getProjectFormOptions"]);
+    Route::get('/getProjectsByProjectType/{project_type_id}', [ProjectController::class, 'getProjectsByProjectType']);
+    Route::get('form-options/project', [ProjectController::class, "getProjectFormOptions"]);
     Route::apiResource('/project-type', ProjectType::class);
-});
 
+    Route::apiResource('/tasks', TaskController::class);
+});
