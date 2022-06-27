@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         Subcity::factory(1)->create(["name" => "yeka", "abbrevation" => "yeka"]);
         Subcity::factory(1)->create(["name" => "kirkos", "abbrevation" => "kirkos"]);
         Subcity::factory(1)->create(["name" => "arada", "abbrevation" => "arada"]);
-        Subcity::factory(1)->create(["name" => "yeka", "abbrevation" => "yeka"]);
+        Subcity::factory(1)->create(["name" => "bole", "abbrevation" => "bole"]);
         Subcity::factory(1)->create(["name" => "nefas-Silk Laphto", "abbrevation" => "N/silk"]);
         Subcity::factory(1)->create(["name" => "gullele", "abbrevation" => "gullele"]);
         Subcity::factory(1)->create(["name" => "kolfe-Keranio", "abbrevation" => "kolfe"]);
@@ -43,8 +43,10 @@ class DatabaseSeeder extends Seeder
 
             User::factory(1)->create()->each(function ($user) use ($projectType) {
 
-                $projectType->projects()->saveMany(Project::factory(5)->create(["project_type_id" => $projectType->id,
-                "team_leader_id" => $user->id, "subcity_id" => Subcity::inRandomOrder()->first()->id])->each(function ($project) {
+                $projectType->projects()->saveMany(Project::factory(5)->create([
+                    "project_type_id" => $projectType->id,
+                    "team_leader_id" => $user->id, "subcity_id" => Subcity::inRandomOrder()->first()->id
+                ])->each(function ($project) {
 
                     $project->teamMembers()->create(["user_id" => 1]);
 
@@ -70,9 +72,7 @@ class DatabaseSeeder extends Seeder
                         User::factory(1)->create()->each(function ($user) use ($project) {
                             $project->teamMembers()->create(["user_id" => $user->id, "project_id" => $project->id]);
                         });
-
                     }));
-
                 }));
             });
         });

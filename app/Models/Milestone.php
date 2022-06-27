@@ -11,7 +11,8 @@ class Milestone extends Model
 
     protected $guarded = [];
 
-    public function tasks(){
+    public function tasks()
+    {
         return $this->hasMany(Task::class);
     }
 
