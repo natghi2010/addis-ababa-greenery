@@ -45,7 +45,7 @@ class ReportSummaryService
             ->join("tasks", "projects.id", "=", "tasks.project_id")
             ->join("project_types", "projects.project_type_id", "=", "project_types.id")
             ->where("project_types.id", $project_type_id)
-             ->when($project_type_id, function ($query) use ($project_type_id) {
+            ->when($project_type_id, function ($query) use ($project_type_id) {
                 return $query->where("project_types.id", $project_type_id);
             })
             ->select(
@@ -57,7 +57,9 @@ class ReportSummaryService
             )
             ->groupBy(
                 "projects.name",
-                "projects.id"
+                "projects.id",
+                "project.starting_date",
+                "project.ending_date"
             )->get();
     }
 
@@ -82,7 +84,8 @@ class ReportSummaryService
     }
 
 
-    public function getProjectSummaryBySubcity(){
+    public function getProjectSummaryBySubcity()
+    {
         return \DB::table("projects")
             ->join("tasks", "projects.id", "=", "tasks.project_id")
             ->join("project_types", "projects.project_type_id", "=", "project_types.id")
