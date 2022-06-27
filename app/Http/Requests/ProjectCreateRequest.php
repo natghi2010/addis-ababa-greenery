@@ -31,8 +31,11 @@ class ProjectCreateRequest extends FormRequest
             "subcity_id"=>"required",
             "milestones.*.name"=>"required",
             "milestones.*.description"=>"required",
-            "milestones.tasks.*.name"=>"required",
+            "milestones.tasks.*.title"=>"required",
             "milestones.tasks.*.description"=>"required",
+            "team_leader_id"=>"required",
+            "team_members.*.user_id"=>"required",
+
         ];
     }
 
@@ -47,9 +50,10 @@ class ProjectCreateRequest extends FormRequest
             "subcity_id.required"=>"subcity is required",
             "milestones.*.name.required"=>"Milestone name is required",
             "milestones.*.description.required"=>"Milestone description is required",
-            "milestones.tasks.*.name.required"=>"Task name is required",
+            "milestones.tasks.*.title.required"=>"Task name is required",
             "milestones.tasks.*.description.required"=>"Task description is required",
-
+            "team_leader_id.required"=>"Team leader is required",
+            "team_members.*.user_id.required"=>"Team member is required",
         ];
     }
 

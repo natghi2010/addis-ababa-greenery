@@ -37,7 +37,6 @@ Route::post("login", [AuthenticationController::class, "login"])->name("login");
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource("report", ReportController::class);
     Route::resource("history", HistoryController::class);
- //   Route::resource("report", ReportController::class);
     Route::get("logout", [AuthenticationController::class, "logout"])->name("logout");
 });
 
