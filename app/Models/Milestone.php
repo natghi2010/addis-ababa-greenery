@@ -20,4 +20,9 @@ class Milestone extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function getDurationAttribute()
+    {
+        return $this->end_date->diffInDays($this->start_date);
+    }
 }
