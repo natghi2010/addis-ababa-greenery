@@ -52,6 +52,7 @@ class ReportSummaryService
                 \DB::raw('SUM(CASE WHEN status = "closed" THEN 1 ELSE 0 END) as closed'),
                 \DB::raw('SUM(CASE WHEN status IS NOT NULL THEN 1 ELSE 0 END) as total'),
                 \DB::raw('ROUND(SUM(CASE WHEN status = "closed" THEN 1 ELSE 0 END) / SUM(CASE WHEN status IS NOT NULL THEN 1 ELSE 0 END) * 100,2) AS total_progress'),
+                \DB::raw('DATEDIFF(projects.end_date,projects.start_date) as duration'),
                 "projects.name as project_name",
                 "projects.id as project_id"
             )

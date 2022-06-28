@@ -18,7 +18,7 @@ class ProjectController extends Controller
     }
 
 
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -30,11 +30,9 @@ class ProjectController extends Controller
             $projects = $this->projectService->getProjectsByProjectType($project_type_id);
 
             return response()->success($projects);
-
         } catch (\Throwable $th) {
 
             return response()->error($th->getMessage());
-
         }
     }
 
@@ -50,11 +48,9 @@ class ProjectController extends Controller
             $projects = $this->projectService->getProjects();
 
             return response()->success($projects);
-
         } catch (\Throwable $th) {
 
             return response()->error($th->getMessage());
-
         }
     }
 
@@ -71,11 +67,9 @@ class ProjectController extends Controller
             $this->projectService->createProject($request->all());
 
             return response()->success();
-
         } catch (\Throwable $th) {
 
             return response()->error($th->getMessage());
-
         }
     }
 
@@ -91,11 +85,9 @@ class ProjectController extends Controller
             $project = $this->projectService->getProject($id);
 
             return response()->success($project);
-
         } catch (\Throwable $th) {
 
             return response()->error($th->getMessage());
-
         }
     }
 
@@ -123,16 +115,15 @@ class ProjectController extends Controller
     }
 
 
-    public function getProjectFormOptions(){
+    public function getProjectFormOptions()
+    {
         try {
             $project_types = $this->projectService->getProjectFormOptions();
 
             return response()->success($project_types);
-
         } catch (\Throwable $th) {
 
             return response()->error($th->getMessage());
-
         }
     }
 }

@@ -35,8 +35,8 @@ class ProjectService
 
     public function getProject($id)
     {
-        $project =  Project::with("projectType","subcity", "challenges", "teamLeader", "teamMembers.user", "reports", "stakeHolders.user")->find($id);
-        $project->milestones =  $this->reportSummaryService->getProjectMilestone($project->project_type_id,$project->id);
+        $project =  Project::with("projectType", "subcity", "challenges", "teamLeader", "teamMembers.user", "reports", "stakeHolders.user")->find($id);
+        $project->milestones =  $this->reportSummaryService->getProjectMilestone($project->project_type_id, $project->id);
 
         return $project;
     }
@@ -99,15 +99,16 @@ class ProjectService
     }
 
 
-    public function getProjectFormOptions(){
+    public function getProjectFormOptions()
+    {
 
-          $data = [
-              "project_types"=>\DB::table("project_types")->select('id','title')->get(),
-              "users"=>\DB::table("users")->select('id','name')->get(),
-              "subcities"=>\DB::table("subcities")->select('id','name')->get()
-          ];
+        $data = [
+            "project_types" => \DB::table("project_types")->select('id', 'title')->get(),
+            "users" => \DB::table("users")->select('id', 'name')->get(),
+            "subcities" => \DB::table("subcities")->select('id', 'name')->get()
+        ];
 
 
-          return $data;
+        return $data;
     }
 }
