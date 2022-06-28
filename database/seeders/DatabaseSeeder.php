@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
             User::factory(1)->create()->each(function ($user) use ($projectType) {
 
                 $projectType->projects()->saveMany(Project::factory(5)->create([
+
                     "project_type_id" => $projectType->id,
                     "team_leader_id" => $user->id, "subcity_id" => Subcity::inRandomOrder()->first()->id
                 ])->each(function ($project) {
