@@ -15,7 +15,7 @@ class ProjectFactory extends Factory
     {
 
         return [
-            "name"=>$this->faker->word,
+            "name"=>$this->faker->randomElement(["project1","project2","project3","project4","project5","project6","project7","project8","project9","project10"]),
             "description"=>$this->faker->text,
             "cover_image"=>"https://www.arabianbusiness.com/cloud/2021/09/14/ZGzm4bk2-la-gare-eagle-hills.jpg",
             "location_lat"=>$this->faker->latitude,

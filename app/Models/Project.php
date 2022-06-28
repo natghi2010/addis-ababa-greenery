@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Project extends Model
 {
@@ -11,14 +12,30 @@ class Project extends Model
 
     protected $guarded = [];
 
+    // protected $appends = ['start_date'];
+
     public function milestones()
     {
         return $this->hasMany(Milestone::class);
     }
 
+
+    // public function getStartDateAttribute()
+    // {
+    //     return Carbon::parse($this->attributes['start_date'])->format('d-m-Y');
+    // }
+
     public function projectType()
     {
         return $this->belongsTo(ProjectType::class)->select('id', 'title');
+    }
+
+    public function getStartDateAttribute( $value ) {
+        return (new Carbon($value))->format('D d M Y');
+    }
+
+    public function getEndDateAttribute( $value ) {
+        return (new Carbon($value))->format('D d M Y');
     }
 
     public function stakeHolders()

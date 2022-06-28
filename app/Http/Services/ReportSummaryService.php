@@ -102,4 +102,7 @@ class ReportSummaryService
                 "subcities.name",
             )->get();
     }
+
+
+
 }

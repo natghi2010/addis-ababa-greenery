@@ -32,3 +32,8 @@ Route::middleware([
 Route::get('dashboard',[DashboardController::class,'index']);
 Route::get('report',[ReportController::class,'index']);
 
+
+Route::get('/qrcode', function () {
+   QR
+});
+
