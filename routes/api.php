@@ -42,10 +42,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get("logout", [AuthenticationController::class, "logout"])->name("logout");
 });
 
-
+Route::resource("report", ReportController::class);
 //Test
 Route::prefix("v1")->group(function () {
-    Route::resource("report", ReportController::class);
+
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/project', ProjectController::class);
     Route::get('/project-types', [ProjectTypeController::class, "index"]);
