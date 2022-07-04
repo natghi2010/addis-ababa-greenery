@@ -37,7 +37,7 @@ Route::post("login", [AuthenticationController::class, "login"])->name("login");
 
 //group by auth
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::resource("report", ReportController::class);
+
     Route::resource("history", HistoryController::class);
     Route::get("logout", [AuthenticationController::class, "logout"])->name("logout");
 });
@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 //Test
 Route::prefix("v1")->group(function () {
+    Route::resource("report", ReportController::class);
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/project', ProjectController::class);
     Route::get('/project-types', [ProjectTypeController::class, "index"]);
