@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\ProjectTypeController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\UserController;
 
@@ -46,6 +47,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 Route::prefix("v1")->group(function () {
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/project', ProjectController::class);
+    Route::get('/project-types', [ProjectTypeController::class, "index"]);
     Route::get('/project-types/subcity/{id}', [ProjectController::class, "getProjectTypesBySubcity"]);
     Route::get('/project-types/subcity/{id}/{project_type_id}', [ProjectController::class, "getProjectsBySubcity"]);
     Route::apiResource('/user', UserController::class);
