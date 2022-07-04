@@ -34,13 +34,13 @@ class ReportingService
         $data["cheated"] = !$this->ReportAuthenticationService->isValid($project, $data['qr_code_value'], $data['location_lat'], $data['location_long']);
 
         return Report::create([
-            "reporter_id"=>auth()->user()->id,
-            "location_long"=>$data["location_long"],
-            "location_lat"=>$data["location_lat"],
-            "project_id"=>$project->id,
-            "image"=>$data["image"],
-            "cheated"=>$data["cheated"],
-            "answer"=>$data["answer"]
+            "reporter_id" => auth()->user()->id,
+            "location_long" => $data["location_long"],
+            "location_lat" => $data["location_lat"],
+            "project_id" => $project->id,
+            "image" => $data["image"],
+            "cheated" => $data["cheated"],
+            "answer" => $data["answer"]
         ]);
     }
 

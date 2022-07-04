@@ -7,14 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectCreateRequest;
 use App\Http\Services\ProjectService;
+use App\Http\Services\SubcityService;
 
 class ProjectController extends Controller
 {
     protected $projectService;
+    protected $subcityService;
 
-    public function __construct(ProjectService $projectService)
+    public function __construct(SubcityService $subcityService, ProjectService $projectService)
     {
         $this->projectService = $projectService;
+        $this->subcityService = $subcityService;
     }
 
 
@@ -35,6 +38,7 @@ class ProjectController extends Controller
             return response()->error($th->getMessage());
         }
     }
+
 
 
     /**
@@ -121,6 +125,30 @@ class ProjectController extends Controller
             $project_types = $this->projectService->getProjectFormOptions();
 
             return response()->success($project_types);
+        } catch (\Throwable $th) {
+
+            return response()->error($th->getMessage());
+        }
+    }
+
+    public function getProjectTypesBySubcity($subcity_id)
+    {
+        try {
+            $project_types = $this->subcityService->getProjectTypesBySubcity($subcity_id);
+
+            return response()->success($project_types);
+        } catch (\Throwable $th) {
+
+            return response()->error($th->getMessage());
+        }
+    }
+
+    public function getProjectsBySubcity($subcity_id, $project_type_id)
+    {
+        try {
+            $projects = $this->subcityService->getProjectsBySubcity($subcity_id, $project_type_id);
+
+            return response()->success($projects);
         } catch (\Throwable $th) {
 
             return response()->error($th->getMessage());

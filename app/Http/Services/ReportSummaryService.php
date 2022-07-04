@@ -59,8 +59,8 @@ class ReportSummaryService
             ->groupBy(
                 "projects.name",
                 "projects.id",
-                "project.starting_date",
-                "project.ending_date"
+                "projects.start_date",
+                "projects.end_date"
             )->get();
     }
 
@@ -88,7 +88,11 @@ class ReportSummaryService
                 "milestones.start_date",
                 "milestones.end_date",
                 "milestones.deadline"
-            )->get();
+            )
+            ->orderBy(
+                "milestones.name"
+            )
+            ->get();
     }
 
 
@@ -113,5 +117,20 @@ class ReportSummaryService
                 "subcities.id",
                 "subcities.name",
             )->get();
+    }
+
+    public function getTaskByMileStone($milestone_id)
+    {
+        return \DB::table("tasks")
+            ->where('milestone_id', $milestone_id)
+            ->select(
+                "id",
+                "title",
+                "status"
+            )
+            ->orderBy(
+                "status"
+            )
+            ->get();
     }
 }

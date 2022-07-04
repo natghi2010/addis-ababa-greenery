@@ -37,6 +37,9 @@ class ProjectService
     {
         $project =  Project::with("projectType", "subcity", "challenges", "teamLeader", "teamMembers.user", "reports", "stakeHolders.user")->find($id);
         $project->milestones =  $this->reportSummaryService->getProjectMilestone($project->project_type_id, $project->id);
+        $project->milestones->each(function ($milestone) {
+            $milestone->tasks = $this->reportSummaryService->getTaskByMileStone($milestone->milestone_id);
+        });
 
         return $project;
     }

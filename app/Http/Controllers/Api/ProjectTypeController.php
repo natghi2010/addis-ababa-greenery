@@ -3,10 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\ProjectTypeService;
+use App\Http\Services\ReportSummaryService;
 use Illuminate\Http\Request;
 
 class ProjectTypeController extends Controller
 {
+    protected $reportSummaryService;
+
+    public function __construct(ReportSummaryService $reportSummaryService)
+    {
+        $this->reportSummaryService = $reportSummaryService;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,15 @@ class ProjectTypeController extends Controller
      */
     public function index()
     {
-        //
+        try {
+
+            $data = $this->reportSummaryService->getProjectTypeSummary();
+
+            return response()->success($data);
+        } catch (\Throwable $th) {
+
+            return response()->error($th->getMessage());
+        }
     }
 
     /**
