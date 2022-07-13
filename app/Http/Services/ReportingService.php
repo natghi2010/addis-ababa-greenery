@@ -33,6 +33,16 @@ class ReportingService
         $project = Project::first();
         $data["cheated"] = !$this->ReportAuthenticationService->isValid($project, $data['qr_code_value'], $data['location_lat'], $data['location_long']);
 
+        //convert base 64 to file
+        $image = $data['image'];
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = 'report_' . time() . '.png';
+        $imagePath = public_path() . '/images/' . $imageName;
+        \File::put($imagePath, base64_decode($image));
+
+        $data['image'] = $imageName;
+
         return Report::create([
             "reporter_id" => auth()->user()->id,
             "location_long" => $data["location_long"],

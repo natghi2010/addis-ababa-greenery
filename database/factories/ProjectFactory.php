@@ -15,13 +15,13 @@ class ProjectFactory extends Factory
     {
 
         return [
-            "name"=>$this->faker->randomElement(["project1","project2","project3","project4","project5","project6","project7","project8","project9","project10"]),
-            "description"=>$this->faker->text,
-            "cover_image"=>"https://www.arabianbusiness.com/cloud/2021/09/14/ZGzm4bk2-la-gare-eagle-hills.jpg",
-            "location_lat"=>$this->faker->latitude,
-            "location_long"=>$this->faker->longitude,
-            "start_date"=>today(),
-            "end_date"=>today()->addDays(50),
+            "name" => $this->faker->randomElement(["Project 1", "Project 2", "Project 3", "Project 4", "Project 5", "Project 6", "Project 7", "Project 8", "Project 9", "Project 10"]),
+            "description" => $this->faker->text,
+            "cover_image" => "https://www.arabianbusiness.com/cloud/2021/09/14/ZGzm4bk2-la-gare-eagle-hills.jpg",
+            "location_lat" => $this->faker->latitude,
+            "location_long" => $this->faker->longitude,
+            "start_date" => today(),
+            "end_date" => today()->addDays(50),
         ];
     }
 }

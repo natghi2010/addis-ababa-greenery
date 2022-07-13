@@ -14,7 +14,7 @@ class ProjectTypeFactory extends Factory
     public function definition()
     {
         return [
-            "title"=>$this->faker->randomElement(["project type 1","project type 2","project type 3","project type 4","project type 5","project type 6","project type 7","project type 8","project type 9","project type 10"]),
+            "title" => $this->faker->randomElement(["Project Category 1", "Project Category 2", "Project Category 3", "Project Category 4", "Project Category 5", "Project Category 6", "Project Category 7", "Project Category 8", "Project Category 9", "Project Category 10"]),
         ];
     }
 }

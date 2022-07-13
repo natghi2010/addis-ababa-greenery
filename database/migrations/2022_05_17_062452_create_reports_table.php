@@ -20,7 +20,7 @@ class CreateReportsTable extends Migration
             $table->string('image')->nullable();
             $table->string('location_lat')->nullable();
             $table->string('location_long')->nullable();
-            $table->string("answer")->nullable();
+            $table->longText("answer")->nullable();
             $table->boolean("cheated")->default(false);
             $table->timestamps();
         });
