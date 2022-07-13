@@ -38,7 +38,7 @@ class ReportingService
         $image = str_replace('data:image/png;base64,', '', $image);
         $image = str_replace(' ', '+', $image);
         $imageName = 'report_' . time() . '.png';
-        $imagePath = public_path() . '/images/' . $imageName;
+        $imagePath = public_path() . '/' . $imageName;
         \File::put($imagePath, base64_decode($image));
 
         $data['image'] = $imageName;
