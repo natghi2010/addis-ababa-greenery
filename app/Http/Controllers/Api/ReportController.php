@@ -28,8 +28,7 @@ class ReportController extends Controller
 
             $data = $this->reportService->getReports();
 
-            return response()->success('Successful operation', $data);
-
+            return response()->success($data);
         } catch (\Throwable $th) {
             return response()->error($th->getMessage(), 500);
         }
@@ -76,11 +75,9 @@ class ReportController extends Controller
             $this->reportService->storeReport($data);
 
             return response()->success();
-
         } catch (\Throwable $th) {
 
             return response()->error($th->getMessage(), 500);
-
         }
     }
 
@@ -109,7 +106,7 @@ class ReportController extends Controller
         try {
             $data = $request->all();
             $this->reportService->updateReport($report, $request);
-            return response()->success('Successful operation', $data);
+            return response()->success($data);
         } catch (\Throwable $th) {
             return response()->error($th->getMessage(), 500);
         }

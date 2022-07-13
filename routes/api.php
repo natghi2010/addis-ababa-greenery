@@ -37,12 +37,12 @@ Route::post("login", [AuthenticationController::class, "login"])->name("login");
 
 //group by auth
 Route::group(['middleware' => 'auth:sanctum'], function () {
-
+    Route::resource("report", ReportController::class);
     Route::resource("history", HistoryController::class);
     Route::get("logout", [AuthenticationController::class, "logout"])->name("logout");
 });
 
-Route::resource("report", ReportController::class);
+
 //Test
 Route::prefix("v1")->group(function () {
 
