@@ -54,6 +54,7 @@ class AuthenticationController extends Controller
             $user = Auth::user();
 
             $user->token = $user->createToken('green')->plainTextToken;
+
             return response()->json(["data" => $user]);
         } else {
             return response()->error('Login Failed', 401);
