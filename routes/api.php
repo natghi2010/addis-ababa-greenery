@@ -1,17 +1,18 @@
 <?php
 
 use App\Models\User;
+use App\Models\Report;
 use App\Models\ProjectType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\ProjectController;
-use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\ProjectTypeController;
-use App\Http\Controllers\Api\TaskController;
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,9 +46,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 //Test
 Route::prefix("v1")->group(function () {
-
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/project', ProjectController::class);
+
     Route::get('/project-types', [ProjectTypeController::class, "index"]);
     Route::get('/project-types/subcity/{id}', [ProjectController::class, "getProjectTypesBySubcity"]);
     Route::get('/project-types/subcity/{id}/{project_type_id}', [ProjectController::class, "getProjectsBySubcity"]);
@@ -55,6 +56,8 @@ Route::prefix("v1")->group(function () {
     Route::get('/getProjectsByProjectType/{project_type_id}', [ProjectController::class, 'getProjectsByProjectType']);
     Route::get('form-options/project', [ProjectController::class, "getProjectFormOptions"]);
     Route::apiResource('/project-type', ProjectType::class);
+
+    Route::get('/get-report/pdf/{id}', [ReportController::class, "getReportForPdf"]);
 
     Route::apiResource('/tasks', TaskController::class);
 });

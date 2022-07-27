@@ -5,15 +5,17 @@ namespace App\Http\Controllers\Api;
 use App\Models\Report;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Services\ProjectService;
 use App\Http\Services\ReportingService;
 
 class ReportController extends Controller
 {
     protected $reportService;
 
-    public function __construct(ReportingService $reportingService)
+    public function __construct(ReportingService $reportingService, ProjectService $projectService)
     {
         $this->reportService = $reportingService;
+        $this->projectService = $projectService;
     }
 
 
@@ -113,13 +115,21 @@ class ReportController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * get report by  Id
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function getReportForPdf($id)
     {
-        //
+        try {
+            $data =  [
+                "basic" => $this->projectService->getProjectBasicInfo($id),
+                "tasks" => $this->projectService->getProjectTasks($id)
+            ];
+            return response()->success($data);
+        } catch (\Throwable $th) {
+            return response()->error($th->getMessage());
+        }
     }
 }

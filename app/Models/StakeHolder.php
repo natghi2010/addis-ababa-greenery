@@ -11,6 +11,11 @@ class StakeHolder extends Model
 
     protected $guarded = [];
 
+    protected $hidden = [
+        "created_at",
+        "updated_at"
+    ];
+
     public function project()
     {
         return $this->belongsTo(Project::class);
@@ -18,6 +23,6 @@ class StakeHolder extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->select("id", "name");
     }
 }

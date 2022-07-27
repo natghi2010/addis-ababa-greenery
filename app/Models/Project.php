@@ -12,6 +12,8 @@ class Project extends Model
 
     protected $guarded = [];
 
+    protected $hidden = ["created_at", "updated_at"];
+
     // protected $appends = ['start_date'];
 
     public function milestones()
@@ -30,11 +32,13 @@ class Project extends Model
         return $this->belongsTo(ProjectType::class)->select('id', 'title');
     }
 
-    public function getStartDateAttribute( $value ) {
+    public function getStartDateAttribute($value)
+    {
         return (new Carbon($value))->format('D d M Y');
     }
 
-    public function getEndDateAttribute( $value ) {
+    public function getEndDateAttribute($value)
+    {
         return (new Carbon($value))->format('D d M Y');
     }
 
@@ -45,7 +49,7 @@ class Project extends Model
 
     public function teamLeader()
     {
-        return $this->belongsTo(User::class, "team_leader_id", 'id');
+        return $this->belongsTo(User::class, "team_leader_id", 'id')->select("id", "name");
     }
 
     public function teamMembers()
@@ -68,7 +72,8 @@ class Project extends Model
         return $this->hasMany(Report::class);
     }
 
-    public function subcity(){
-        return $this->belongsTo(Subcity::class);
+    public function subcity()
+    {
+        return $this->belongsTo(Subcity::class)->select('id', 'name');
     }
 }

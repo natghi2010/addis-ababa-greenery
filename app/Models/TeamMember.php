@@ -11,6 +11,13 @@ class TeamMember extends Model
 
     protected $guarded = [];
 
+    protected $hidden = [
+        "project_id",
+        "user_id",
+        "created_at",
+        "updated_at"
+    ];
+
     public function project()
     {
         return $this->belongsTo(Project::class);
@@ -18,6 +25,6 @@ class TeamMember extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class)->select('id','name');
+        return $this->belongsTo(User::class)->select('id', 'name');
     }
 }

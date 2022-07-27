@@ -14,15 +14,22 @@ class ProjectService
 {
     protected $reportSummaryService;
 
-    public function __construct(ReportSummaryService $reportSummaryService)
+    public function __construct(ReportSummaryService $reportSummaryService, TaskService $taskService)
     {
         $this->reportSummaryService = $reportSummaryService;
+        $this->taskService = $taskService;
     }
 
 
     public function getProjects()
     {
         return Project::all();
+    }
+
+
+    public function getProjectBasicInfo($id)
+    {
+        return Project::with("projectType", "subcity", "stakeHolders.user", "teamMembers.user", "teamLeader")->find($id);
     }
 
     public function getProjectsByProjectType($project_type_id)
@@ -42,6 +49,12 @@ class ProjectService
         });
 
         return $project;
+    }
+
+
+    public function getProjectTasks($id)
+    {
+        return $this->taskService->getTaskSummaryByProject($id);
     }
 
     public function createProject($data)
@@ -110,7 +123,6 @@ class ProjectService
             "users" => \DB::table("users")->select('id', 'name')->get(),
             "subcities" => \DB::table("subcities")->select('id', 'name')->get()
         ];
-
 
         return $data;
     }

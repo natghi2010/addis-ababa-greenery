@@ -30,4 +30,13 @@ class TaskService
     {
         Task::find($id)->delete();
     }
+
+    public function getTaskSummaryByProject($project_id)
+    {
+        return \DB::table("tasks")
+            ->where("project_id", $project_id)
+            ->select("tasks.status", "tasks.title")
+            ->groupBy("tasks.status", "tasks.title")
+            ->get();
+    }
 }
