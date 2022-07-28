@@ -125,7 +125,8 @@ class ReportController extends Controller
         try {
             $data =  [
                 "basic" => $this->projectService->getProjectBasicInfo($id),
-                "tasks" => $this->projectService->getProjectTasks($id)
+                "tasks" => $this->projectService->getProjectTasks($id),
+                "milestones" => $this->projectService->getProjectMilestones($id),
             ];
             return response()->success($data);
         } catch (\Throwable $th) {

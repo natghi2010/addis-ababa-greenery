@@ -14,10 +14,14 @@ class ProjectService
 {
     protected $reportSummaryService;
 
-    public function __construct(ReportSummaryService $reportSummaryService, TaskService $taskService)
-    {
+    public function __construct(
+        ReportSummaryService $reportSummaryService,
+        TaskService $taskService,
+        MilestoneService $milestoneService
+    ) {
         $this->reportSummaryService = $reportSummaryService;
         $this->taskService = $taskService;
+        $this->milestoneService = $milestoneService;
     }
 
 
@@ -125,5 +129,10 @@ class ProjectService
         ];
 
         return $data;
+    }
+
+    public function getProjectMilestones(int $id)
+    {
+        return $this->milestoneService->getMilestonesByProject($id);
     }
 }
