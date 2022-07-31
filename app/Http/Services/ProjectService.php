@@ -135,4 +135,23 @@ class ProjectService
     {
         return $this->milestoneService->getMilestonesByProject($id);
     }
+
+    public function getCheatedReports(int $id)
+    {
+        return \DB::table("reports")
+            ->join("users", "users.id", "=", "reports.reporter_id")
+            //join milestones with reports created_at date between  milestone start date and end date
+            ->join("milestones", function ($join) {
+                $join->on("milestones.project_id", "=", "reports.project_id")
+                    ->whereBetween("reports.created_at", ["milestones.start_date", "milestones.end_date"]);
+            })
+            ->where("reports.project_id", $id)
+            ->where("cheated", 1)
+            ->select(
+                "users.name as reporter_name",
+                //convert created_at date
+                \DB::raw("DATE_FORMAT(reports.created_at, '%d/%m/%Y') as date"),
+            )
+            ->get();
+    }
 }

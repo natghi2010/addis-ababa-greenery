@@ -123,10 +123,12 @@ class ReportController extends Controller
     public function getReportForPdf($id)
     {
         try {
+
             $data =  [
                 "basic" => $this->projectService->getProjectBasicInfo($id),
                 "tasks" => $this->projectService->getProjectTasks($id),
                 "milestones" => $this->projectService->getProjectMilestones($id),
+                "cheats" => $this->projectService->getCheatedReports($id),
             ];
             return response()->success($data);
         } catch (\Throwable $th) {
