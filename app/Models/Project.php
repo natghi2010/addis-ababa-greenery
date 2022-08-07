@@ -14,7 +14,7 @@ class Project extends Model
 
     protected $hidden = ["created_at", "updated_at"];
 
-    // protected $appends = ['start_date'];
+    protected $appends = ['remaining_days_until_start_date', 'remaining_days_until_end_date'];
 
     public function milestones()
     {
@@ -75,5 +75,20 @@ class Project extends Model
     public function subcity()
     {
         return $this->belongsTo(Subcity::class)->select('id', 'name');
+    }
+
+    public function getRemainingDaysUntilStartDateAttribute()
+    {
+
+        $diffDays =  Carbon::now()->diffInDays(Carbon::parse($this->attributes['start_date']));
+
+        return Carbon::parse($this->attributes['end_date']) > Carbon::now() ? $diffDays : $diffDays * -1;
+    }
+
+    public function getRemainingDaysUntilEndDateAttribute()
+    {
+        $diffDays =  Carbon::now()->diffInDays(Carbon::parse($this->attributes['end_date']));
+
+        return Carbon::parse($this->attributes['end_date']) > Carbon::now() ? $diffDays : $diffDays * -1;
     }
 }

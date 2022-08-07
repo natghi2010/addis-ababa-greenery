@@ -34,9 +34,17 @@ class TaskService
     public function getTaskSummaryByProject($project_id)
     {
         return \DB::table("tasks")
-            ->where("project_id", $project_id)
-            ->select("tasks.status", "tasks.title")
-            ->groupBy("tasks.status", "tasks.title")
+            ->join("milestones", "tasks.milestone_id", "milestones.id")
+            ->where("tasks.project_id", $project_id)
+            ->select(
+                "tasks.status",
+                "tasks.title",
+                "milestones.name as milestone",
+                "milestones.start_date",
+            )
+            ->groupBy("tasks.status", "tasks.title", "milestones.name", "milestones.start_date")
+            //order by milestone name
+            ->orderBy("tasks.title", "asc")
             ->get();
     }
 }

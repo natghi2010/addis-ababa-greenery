@@ -123,7 +123,6 @@ class ReportController extends Controller
     public function getReportForPdf($id)
     {
         try {
-
             $data =  [
                 "basic" => $this->projectService->getProjectBasicInfo($id),
                 "tasks" => $this->projectService->getProjectTasks($id),
